@@ -1,0 +1,59 @@
+@font-face {
+  font-family: RobotoCondensed;
+  src: url(assets/roboto-condensed.light.ttf);
+  font-weight: 800;
+}
+
+@font-face {
+  font-family: EconomicaBold;
+  src: url(assets/economica-bold.ttf);
+
+}
+h1, h2, h3, h4, h5 {
+  font-family: 'EconomicaBold';
+}
+
+body {
+  text-align: center;
+  font-size: 20px;
+  padding: 2.5%;
+  font-family: "RobotoCondensed"
+}
+
+.track {
+  width: 250px;
+  height: 250px;
+  position: relative;
+  display: inline-block;
+  margin: 20px;
+  cursor: pointer;
+}
+
+.track-image {
+  width: 250px;
+  height: 250px;
+}
+
+.track-text {
+  position: absolute;
+  width: 250px;
+  bottom: 0px;
+  background-color: black;
+  color: white;
+  padding: 5px;
+  box-sizing: border-box;
+}
+
+.track-icon {
+background: black;
+height: 70px;
+width: 70px;
+border-radius: 35px;
+color: white;
+opacity: 0.8;
+position: absolute;
+top: calc(50% - 45px);
+left: calc(50% - 35px);
+box-sizing: border-box;
+padding: 25px;
+} 
