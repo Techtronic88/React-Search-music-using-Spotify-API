@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 
 class Tracks extends Component {
 
-    state = { playing: false, audio: null, playingPreviewUrl: null }
+    state = { playing: false, audio: null, playingReview: null }
 
     // NOTICE: we are using double arrow function
     playAudio = previewUrl => () => {
@@ -11,31 +11,36 @@ class Tracks extends Component {
         
         // The line below is the same as saying if (this.state.playing === false) just by putting an exclaimation mark
         // Note: false = playing, true = not playing
-        // PROBLEM: Original object when clicked on playing. We want that to play not a new one with a new click
+        // PROBLEM: Original object when clicked on playing. Click again the same song play over the same one
         // SOLUTION: notice we added audio into state: null -> we can refer to that to pause. 
         // TAKE AWAY LESSON  we can use boolean to solve these kind of problems
 
-        // NEXT PROBLEM: It takes 2 clicks for each tracks to play while the previous song is playing
-        // if they click on the same album -> we know to call pause  -> state now hold current song 
-        // next album get click -> we change the state to the clicked one  preview URL
-        
+        // everytime CLICK happens -> new audio get recreated 
+              // We want to pause the origial audio object: Not the new one
+                // Then keep track of the current audio state so we can pause that one later
 
-        if(!this.state.playing){
-            audio.play();
-            this.setState({playing: true, audio, playingPreviewUrl: previewUrl })
-        } else {
-            this.state.audio.pause();   
-             if(this.state.playingPreviewUrl === previewUrl){
-                 this.setState({playing: false})
-                 audio.play()
-                  
-             } else {
-                 this.setState({ audio, playingPreviewUrl: previewUrl})
-             }
-            this.setState({playing: false})
-          }
+
+
+        // NEXT PROBLEM: It takes 1 click to pause - 1 click on the next to play the next song
+               // We want one click on the next album and plays straight away.
+        // STEPS: When click -> pause existing song -> get the next click object -> play that
+               // The idea is if they click on the same album we know to pause 
+                  // If they click on a different previewURL we want to pause and play that previewURL 
+
         
-    }
+        if(!this.state.playing){
+            audio.play()
+            this.setState({ playing:true, audio: audio, playingReview: previewUrl })
+        } else {
+            this.state.audio.pause();
+             if ( this.state.playingReview === previewUrl ) {
+                 this.setState({ playing: false});
+             }  else {
+                 audio.play();
+                 this.setState({audio, playingReview: previewUrl})
+        }
+    }       
+}
 
     render() {
         
